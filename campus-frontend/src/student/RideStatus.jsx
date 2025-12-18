@@ -9,7 +9,7 @@ export default function RideStatus({
 }) {
   const [ride, setRide] = useState(activeRide);
 
-  // sync when parent updates
+  // 🔁 sync with parent
   useEffect(() => {
     if (activeRide) setRide(activeRide);
   }, [activeRide]);
@@ -18,7 +18,7 @@ export default function RideStatus({
     return <p className="container">Loading ride status...</p>;
   }
 
-  // poll backend
+  // 🔄 polling (we’ll optimize later)
   useEffect(() => {
     if (!ride.id) return;
 
@@ -37,7 +37,7 @@ export default function RideStatus({
     return () => clearInterval(interval);
   }, [ride.id]);
 
-  // cleanup on end
+  // 🧹 cleanup on end
   useEffect(() => {
     if (["completed", "cancelled"].includes(ride.status)) {
       setActiveRide(null);
@@ -48,10 +48,12 @@ export default function RideStatus({
   return (
     <div className="container">
       <h2>Ride Status</h2>
-      <p><strong>Status:</strong> {ride.status}</p>
+      <p>
+        <strong>Status:</strong> {ride.status}
+      </p>
 
       {["accepted", "arrived", "ongoing"].includes(ride.status) && (
-        <StudentLiveTracking rideId={ride.id} />
+        <StudentLiveTracking ride={ride} />
       )}
     </div>
   );

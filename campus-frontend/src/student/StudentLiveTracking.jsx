@@ -1,30 +1,37 @@
 import { useState } from "react";
 import useRideSocket from "../hooks/useRideSocket";
+import LiveMap from "../components/LiveMap";
 
-export default function StudentLiveTracking({ rideId }) {
+export default function StudentLiveTracking({ ride }) {
   const [driverLocation, setDriverLocation] = useState(null);
 
-  useRideSocket(rideId, (data) => {
+  // 🛑 guard
+  if (!ride) return null;
+
+  useRideSocket(ride.id, (data) => {
     if (data.type === "location_update") {
       setDriverLocation({
-        lat: data.lat,
-        lng: data.lng,
+        lat: Number(data.lat),
+        lng: Number(data.lng),
       });
     }
   });
 
   return (
-    <div className="p-4 border rounded mt-4">
+    <div className="mt-4">
       <h3>Driver Live Location</h3>
 
-      {!driverLocation && <p>Waiting for driver location...</p>}
-
-      {driverLocation && (
-        <>
-          <p>Lat: {driverLocation.lat}</p>
-          <p>Lng: {driverLocation.lng}</p>
-        </>
+      {!driverLocation && (
+        <p>Waiting for driver location...</p>
       )}
+
+      <LiveMap
+        pickup={{
+          lat: ride.pickup_lat,
+          lng: ride.pickup_lng,
+        }}
+        driverLocation={driverLocation}
+      />
     </div>
   );
 }
