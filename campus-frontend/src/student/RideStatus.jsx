@@ -49,7 +49,10 @@ export default function RideStatus({
     <div className="container">
       <h2>Ride Status</h2>
       <p>
-        <strong>Status:</strong> {ride.status}
+        <span className={`status-pill status-${ride.status}`}>
+       {ride.status}
+</span>
+
       </p>
 
       {["accepted", "arrived", "ongoing"].includes(ride.status) && (

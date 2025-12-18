@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAuth from "./hooks/useAuth";
+import "./utils/fixLeafletIcon";
 
 import Login from "./auth/Login";
 import RegisterStudent from "./auth/RegisterStudent";

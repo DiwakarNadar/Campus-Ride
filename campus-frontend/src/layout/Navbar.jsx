@@ -1,8 +1,9 @@
+import "./Navbar.css"
 export default function Navbar({ user, logout }) {
   return (
     <div className="navbar">
-      <span>{user.email} ({user.role})</span>
-      <button onClick={logout}>Logout</button>
+      <span className="nav-title">{user.email} ({user.role})</span>
+      <button className="nav-actions" onClick={logout}>Logout</button>
     </div>
   );
 }

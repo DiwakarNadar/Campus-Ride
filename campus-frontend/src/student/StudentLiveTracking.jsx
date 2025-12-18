@@ -26,9 +26,13 @@ export default function StudentLiveTracking({ ride }) {
       )}
 
       <LiveMap
-        pickup={{
+         pickup={{
           lat: ride.pickup_lat,
           lng: ride.pickup_lng,
+        }}
+        drop={{
+          lat: ride.drop_lat,
+          lng: ride.drop_lng,
         }}
         driverLocation={driverLocation}
       />
