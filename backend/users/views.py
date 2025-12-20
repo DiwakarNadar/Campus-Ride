@@ -332,13 +332,18 @@ class SOSCreateView(APIView):
 
     def post(self, request):
         serializer = SOSCreateSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+
+        if not serializer.is_valid():
+            print("❌ SOS VALIDATION ERROR:", serializer.errors)
+            return Response(serializer.errors, status=400)
+
         serializer.save(user=request.user)
 
         return Response(
             {"message": "SOS sent successfully"},
             status=status.HTTP_201_CREATED
         )
+
 
 
 class SOSAdminListView(generics.ListAPIView):
@@ -397,4 +402,5 @@ class MeView(APIView):
             "email": user.email,
             "role": user.role,
             "is_staff": user.is_staff,
+            "name": user.name
         })

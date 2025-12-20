@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import BookRide from "./BookRide";
 import RideStatus from "./RideStatus";
+import SOSButton from "./SOSButton";
+
 
 export default function StudentHome() {
   const [view, setView] = useState("home");
@@ -52,9 +54,8 @@ export default function StudentHome() {
         🚕 Book Ride
       </button>
 
-      <button style={{ background: "#e53935", color: "white" }}>
-        🚨 SOS
-      </button>
+      <SOSButton />
+
     </div>
   );
 }

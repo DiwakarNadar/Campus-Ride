@@ -449,9 +449,20 @@ class RideHistorySerializer(serializers.ModelSerializer):
             "cancelled_at",
         ]
 class SOSCreateSerializer(serializers.ModelSerializer):
+    latitude = serializers.DecimalField(
+        max_digits=9, decimal_places=6
+    )
+    longitude = serializers.DecimalField(
+        max_digits=9, decimal_places=6
+    )
+    message = serializers.CharField(
+        required=False, allow_blank=True
+    )
+
     class Meta:
         model = SOS
         fields = ["latitude", "longitude", "message"]
+
 
 class SOSAdminSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()

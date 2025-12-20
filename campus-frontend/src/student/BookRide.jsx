@@ -7,26 +7,19 @@ export default function BookRide({ goBack, setActiveRide, setView }) {
   const [drop, setDrop] = useState(null);
   const [error, setError] = useState("");
 
-  // 📍 Use GPS
+  // 📍 Use device location
   const getCurrentLocation = () => {
-    if (!navigator.geolocation) {
-      setError("Geolocation not supported");
-      return;
-    }
-
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setPickup({
           lat: Number(pos.coords.latitude.toFixed(6)),
           lng: Number(pos.coords.longitude.toFixed(6)),
         });
-        setError("");
       },
       () => setError("Location permission denied")
     );
   };
 
-  // 🚕 Request ride
   const requestRide = async () => {
     setError("");
 
@@ -50,12 +43,7 @@ export default function BookRide({ goBack, setActiveRide, setView }) {
 
       setView("status");
     } catch (err) {
-      const msg =
-        err.response?.data?.non_field_errors?.[0] ||
-        err.response?.data ||
-        "Failed to request ride";
-
-      setError(typeof msg === "string" ? msg : JSON.stringify(msg));
+      setError("Failed to request ride");
     }
   };
 
@@ -69,22 +57,8 @@ export default function BookRide({ goBack, setActiveRide, setView }) {
         📍 Use My Current Location
       </button>
 
-      {pickup && (
-        <p className="info-text">Pickup selected ✔</p>
-      )}
-      {drop && (
-        <p className="info-text">Drop selected ✔</p>
-      )}
-
-      <LocationSearch
-        label="Pickup Location (CU only)"
-        onSelect={setPickup}
-      />
-
-      <LocationSearch
-        label="Drop Location (CU only)"
-        onSelect={setDrop}
-      />
+      <LocationSearch label="Pickup Location" onSelect={setPickup} />
+      <LocationSearch label="Drop Location" onSelect={setDrop} />
 
       <button onClick={requestRide}>Request Ride</button>
       <button onClick={goBack}>Back</button>
