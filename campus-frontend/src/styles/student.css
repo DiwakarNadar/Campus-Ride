@@ -1,0 +1,142 @@
+/* ---------- LAYOUT ---------- */
+.student-home,
+.book-ride-card,
+.ride-status-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+}
+
+/* ---------- TITLES ---------- */
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.muted-text {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* ---------- ACTIONS ---------- */
+.student-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---------- STATUS ---------- */
+.status-row {
+  margin: 12px 0;
+}
+
+.status-pill {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pending { background: #fff7ed; color: #c2410c; }
+.status-accepted { background: #ecfeff; color: #0369a1; }
+.status-arrived { background: #eef2ff; color: #4338ca; }
+.status-ongoing { background: #ecfdf5; color: #047857; }
+
+/* ---------- MAP ---------- */
+.map-wrapper {
+  margin-top: 12px;
+  height: 320px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* ---------- BUTTONS ---------- */
+.primary-btn,
+.secondary-btn,
+.sos-btn {
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: #4f46e5;
+  color: white;
+}
+
+.secondary-btn {
+  background: #f3f4f6;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* ---------- SOS ---------- */
+.sos-container {
+  text-align: center;
+}
+
+.sos-btn {
+  background: #dc2626;
+  color: white;
+  width: 100%;
+}
+
+.sos-btn:disabled {
+  opacity: 0.6;
+}
+
+.sos-success {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+/* ---------- ERROR ---------- */
+.error-text {
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* ---------- ANIMATIONS ---------- */
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 480px) {
+  .btn-row {
+    flex-direction: column;
+  }
+}

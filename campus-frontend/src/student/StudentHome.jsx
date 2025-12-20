@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import BookRide from "./BookRide";
 import RideStatus from "./RideStatus";
 import SOSButton from "./SOSButton";
-
+import "../styles/student.css";
 
 export default function StudentHome() {
   const [view, setView] = useState("home");
   const [activeRide, setActiveRide] = useState(null);
 
-  // restore on refresh
   useEffect(() => {
     const saved = localStorage.getItem("activeRide");
     if (saved) {
@@ -17,7 +16,6 @@ export default function StudentHome() {
     }
   }, []);
 
-  // persist
   useEffect(() => {
     if (activeRide) {
       localStorage.setItem("activeRide", JSON.stringify(activeRide));
@@ -47,15 +45,16 @@ export default function StudentHome() {
   }
 
   return (
-    <div className="container">
-      <h2>Student Home</h2>
+    <div className="student-home fade-in">
+      <h2 className="page-title">Student Dashboard</h2>
 
-      <button onClick={() => setView("book")}>
-        🚕 Book Ride
-      </button>
+      <div className="student-actions">
+        <button className="primary-btn" onClick={() => setView("book")}>
+          🚕 Book a Ride
+        </button>
 
-      <SOSButton />
-
+        <SOSButton />
+      </div>
     </div>
   );
 }

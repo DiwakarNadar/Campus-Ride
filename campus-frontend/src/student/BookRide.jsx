@@ -1,13 +1,13 @@
 import { useState } from "react";
 import api from "../api/api";
 import LocationSearch from "../components/LocationSearch";
+import "../styles/student.css";
 
 export default function BookRide({ goBack, setActiveRide, setView }) {
   const [pickup, setPickup] = useState(null);
   const [drop, setDrop] = useState(null);
   const [error, setError] = useState("");
 
-  // 📍 Use device location
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -22,7 +22,6 @@ export default function BookRide({ goBack, setActiveRide, setView }) {
 
   const requestRide = async () => {
     setError("");
-
     if (!pickup || !drop) {
       setError("Pickup and drop location required");
       return;
@@ -36,32 +35,34 @@ export default function BookRide({ goBack, setActiveRide, setView }) {
         drop_lng: drop.lng,
       });
 
-      setActiveRide({
-        id: res.data.ride_id,
-        status: "pending",
-      });
-
+      setActiveRide({ id: res.data.ride_id, status: "pending" });
       setView("status");
-    } catch (err) {
+    } catch {
       setError("Failed to request ride");
     }
   };
 
   return (
-    <div className="container">
-      <h2>Book Ride</h2>
+    <div className="book-ride-card slide-up">
+      <h2 className="page-title">Book Ride</h2>
 
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error-text">{error}</p>}
 
-      <button onClick={getCurrentLocation}>
+      <button className="secondary-btn" onClick={getCurrentLocation}>
         📍 Use My Current Location
       </button>
 
       <LocationSearch label="Pickup Location" onSelect={setPickup} />
       <LocationSearch label="Drop Location" onSelect={setDrop} />
 
-      <button onClick={requestRide}>Request Ride</button>
-      <button onClick={goBack}>Back</button>
+      <div className="btn-row">
+        <button className="primary-btn" onClick={requestRide}>
+          Request Ride
+        </button>
+        <button className="secondary-btn" onClick={goBack}>
+          Back
+        </button>
+      </div>
     </div>
   );
 }

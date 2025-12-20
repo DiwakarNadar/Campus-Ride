@@ -1,0 +1,164 @@
+/* ---------- LAYOUT ---------- */
+.driver-dashboard {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ---------- STATUS CARD ---------- */
+.driver-status-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+/* ---------- TOGGLE ---------- */
+.status-toggle {
+    
+  width: 50%;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: transform 0.1s, background 0.2s;
+}
+
+.status-toggle.online {
+  background: #16a34a;
+  color: white;
+}
+
+.status-toggle.offline {
+  background: #dc2626;
+  color: white;
+}
+
+.status-toggle:active {
+  transform: scale(0.97);
+}
+
+/* ---------- STATUS TEXT ---------- */
+.driver-status {
+  font-size: 0.95rem;
+}
+
+.status-indicator.green {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.status-indicator.red {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+/* ---------- RIDE CARD ---------- */
+.ride-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 18px 36px rgba(0,0,0,0.1);
+}
+
+.ride-info p {
+  margin-bottom: 6px;
+}
+
+/* ---------- STATUS PILLS ---------- */
+.status-pill {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pending { background: #fff7ed; color: #c2410c; }
+.status-accepted { background: #ecfeff; color: #0369a1; }
+.status-arrived { background: #eef2ff; color: #4338ca; }
+.status-ongoing { background: #ecfdf5; color: #047857; }
+
+/* ---------- ACTION BUTTONS ---------- */
+.driver-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.accept-btn {
+  background: #16a34a;
+  color: white;
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+}
+
+.reject-btn {
+  background: #dc2626;
+  color: white;
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+}
+
+.primary-btn {
+  background: #4f46e5;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+}
+
+.complete-btn {
+  background: #0f172a;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+}
+
+/* ---------- TEXT ---------- */
+.muted-text {
+  color: #6b7280;
+  text-align: center;
+}
+
+/* ---------- ANIMATIONS ---------- */
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 480px) {
+  .driver-actions {
+    flex-direction: column;
+  }
+}

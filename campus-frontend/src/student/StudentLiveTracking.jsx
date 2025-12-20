@@ -1,11 +1,11 @@
 import { useState } from "react";
 import useRideSocket from "../hooks/useRideSocket";
 import LiveMap from "../components/LiveMap";
+import "../styles/student.css";
 
 export default function StudentLiveTracking({ ride }) {
   const [driverLocation, setDriverLocation] = useState(null);
 
-  // 🛑 guard
   if (!ride) return null;
 
   useRideSocket(ride.id, (data) => {
@@ -18,24 +18,20 @@ export default function StudentLiveTracking({ ride }) {
   });
 
   return (
-    <div className="mt-4">
-      <h3>Driver Live Location</h3>
+    <div className="live-tracking-card">
+      <h3 className="section-title">Driver Live Location</h3>
 
       {!driverLocation && (
-        <p>Waiting for driver location...</p>
+        <p className="muted-text">Waiting for driver location...</p>
       )}
 
-      <LiveMap
-         pickup={{
-          lat: ride.pickup_lat,
-          lng: ride.pickup_lng,
-        }}
-        drop={{
-          lat: ride.drop_lat,
-          lng: ride.drop_lng,
-        }}
-        driverLocation={driverLocation}
-      />
+      <div className="map-wrapper">
+        <LiveMap
+          pickup={{ lat: ride.pickup_lat, lng: ride.pickup_lng }}
+          drop={{ lat: ride.drop_lat, lng: ride.drop_lng }}
+          driverLocation={driverLocation}
+        />
+      </div>
     </div>
   );
 }

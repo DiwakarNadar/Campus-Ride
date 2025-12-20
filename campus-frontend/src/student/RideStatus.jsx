@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import StudentLiveTracking from "./StudentLiveTracking";
+import "../styles/student.css";
 
-export default function RideStatus({
-  activeRide,
-  setActiveRide,
-  goHome,
-}) {
+export default function RideStatus({ activeRide, setActiveRide, goHome }) {
   const [ride, setRide] = useState(activeRide);
 
-  // 🔁 sync with parent
   useEffect(() => {
     if (activeRide) setRide(activeRide);
   }, [activeRide]);
 
   if (!ride) {
-    return <p className="container">Loading ride status...</p>;
+    return <p className="loading-text">Loading ride status...</p>;
   }
 
-  // 🔄 polling (we’ll optimize later)
   useEffect(() => {
     if (!ride.id) return;
 
@@ -28,7 +23,7 @@ export default function RideStatus({
         setRide(res.data);
         setActiveRide(res.data);
       } catch (err) {
-        console.error("Failed to fetch ride status", err);
+        console.error(err);
       }
     };
 
@@ -37,7 +32,6 @@ export default function RideStatus({
     return () => clearInterval(interval);
   }, [ride.id]);
 
-  // 🧹 cleanup on end
   useEffect(() => {
     if (["completed", "cancelled"].includes(ride.status)) {
       setActiveRide(null);
@@ -46,14 +40,14 @@ export default function RideStatus({
   }, [ride.status]);
 
   return (
-    <div className="container">
-      <h2>Ride Status</h2>
-      <p>
-        <span className={`status-pill status-${ride.status}`}>
-       {ride.status}
-</span>
+    <div className="ride-status-card fade-in">
+      <h2 className="page-title">Ride Status</h2>
 
-      </p>
+      <div className="status-row">
+        <span className={`status-pill status-${ride.status}`}>
+          {ride.status}
+        </span>
+      </div>
 
       {["accepted", "arrived", "ongoing"].includes(ride.status) && (
         <StudentLiveTracking ride={ride} />

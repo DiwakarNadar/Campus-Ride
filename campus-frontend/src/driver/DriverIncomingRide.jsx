@@ -1,4 +1,5 @@
 import api from "../api/api";
+import "../styles/driver.css";
 
 export default function DriverIncomingRide({ ride, onActionComplete }) {
   if (!ride) return null;
@@ -10,11 +11,7 @@ export default function DriverIncomingRide({ ride, onActionComplete }) {
         ...extraData,
       });
 
-      // 🔄 Force refresh after action
-      if (onActionComplete) {
-        onActionComplete();
-      }
-
+      if (onActionComplete) onActionComplete();
     } catch (err) {
       console.error("Driver action failed:", err.response?.data);
       alert("Action failed");
@@ -22,60 +19,70 @@ export default function DriverIncomingRide({ ride, onActionComplete }) {
   };
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: "16px",
-        borderRadius: "8px",
-        marginTop: "16px",
-      }}
-    >
-      <h3>Current Ride</h3>
+    <div className="ride-card slide-up">
+      <h3 className="section-title">Current Ride</h3>
 
-      <p><strong>Ride ID:</strong> {ride.id}</p>
-      <p><strong>Student ID:</strong> {ride.student}</p>
-      <p>
-        <strong>Status:</strong>{" "}
-        <span style={{ fontWeight: "bold" }}>{ride.status}</span>
-      </p>
+      <div className="ride-info">
+        <p><strong>Ride ID:</strong> {ride.id}</p>
+        <p><strong>Student ID:</strong> {ride.student}</p>
+        <p>
+          <strong>Status:</strong>{" "}
+          <span className={`status-pill status-${ride.status}`}>
+            {ride.status}
+          </span>
+        </p>
+      </div>
 
-      {ride.status === "pending" && (
-        <>
+      <div className="driver-actions">
+        {ride.status === "pending" && (
+          <>
+            <button
+              className="accept-btn"
+              onClick={() =>
+                callAction("/ride/driver-action/", { action: "accept" })
+              }
+            >
+              Accept
+            </button>
+
+            <button
+              className="reject-btn"
+              onClick={() =>
+                callAction("/ride/driver-action/", { action: "reject" })
+              }
+            >
+              Reject
+            </button>
+          </>
+        )}
+
+        {ride.status === "accepted" && (
           <button
-            onClick={() =>
-              callAction("/ride/driver-action/", { action: "accept" })
-            }
+            className="primary-btn"
+            onClick={() => callAction("/ride/arrived/")}
           >
-            Accept
+            Arrived at Pickup
           </button>
+        )}
 
+        {ride.status === "arrived" && (
           <button
-            onClick={() =>
-              callAction("/ride/driver-action/", { action: "reject" })
-            }
+            className="primary-btn"
+            onClick={() => callAction("/ride/start/")}
           >
-            Reject
+            Start Ride
           </button>
-        </>
-      )}
+        )}
 
-      {ride.status === "accepted" && (
-        <button onClick={() => callAction("/ride/arrived/")}>
-          Arrived at Pickup
-        </button>
-      )}
-
-      {ride.status === "arrived" && (
-        <button onClick={() => callAction("/ride/start/")}>
-          Start Ride
-        </button>
-      )}
-
-      {ride.status === "ongoing" && (
-        <button onClick={() => callAction("/ride/complete/")}>
-          Complete Ride
-        </button>
-      )}
+        {ride.status === "ongoing" && (
+          <button
+            className="complete-btn"
+            onClick={() => callAction("/ride/complete/")}
+          >
+            Complete Ride
+          </button>
+        )}
+      </div>
     </div>
   );
 }

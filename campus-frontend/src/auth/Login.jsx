@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/api";
+import "../styles/auth.css";
 
 export default function Login({ onSuccess, goRegister }) {
   const [email, setEmail] = useState("");
@@ -21,22 +22,38 @@ export default function Login({ onSuccess, goRegister }) {
   };
 
   return (
-    <div className="container">
-      <h2>Login</h2>
-      {error && <p className="error">{error}</p>}
+    <div className="auth-page">
+      <div className="auth-card fade-in">
+        <h2 className="auth-title">Welcome Back 👋</h2>
 
-      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <input
-        placeholder="Password"
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        {error && <p className="auth-error">{error}</p>}
 
-      <button onClick={submit}>Login</button>
+        <input
+          className="auth-input"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-    <button><p onClick={() => goRegister("student")}>Register as Student</p></button>  
-     <button><p onClick={() => goRegister("driver")}>Register as Driver</p></button>  
-      
+        <input
+          className="auth-input"
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button className="primary-btn" onClick={submit}>
+          Login
+        </button>
+
+        <div className="auth-links">
+          <button className="link-btn" onClick={() => goRegister("student")}>
+            Register as Student
+          </button>
+          <button className="link-btn" onClick={() => goRegister("driver")}>
+            Register as Driver
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

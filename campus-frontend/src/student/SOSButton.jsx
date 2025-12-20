@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/api";
+import "../styles/student.css";
 
 export default function SOSButton() {
   const [loading, setLoading] = useState(false);
@@ -18,18 +19,13 @@ export default function SOSButton() {
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
         try {
-          const lat = Number(pos.coords.latitude.toFixed(6));
-  const lng = Number(pos.coords.longitude.toFixed(6));
-
-  api.post("/sos/", {
-    latitude: lat,
-    longitude: lng,
-    message: "Help needed",
-  });
-         
-
+          await api.post("/sos/", {
+            latitude: Number(pos.coords.latitude.toFixed(6)),
+            longitude: Number(pos.coords.longitude.toFixed(6)),
+            message: "Help needed",
+          });
           setSent(true);
-        } catch (err) {
+        } catch {
           setError("Failed to send SOS");
         } finally {
           setLoading(false);
@@ -43,21 +39,17 @@ export default function SOSButton() {
   };
 
   if (sent) {
-    return <p style={{ color: "red" }}>🚨 SOS Sent Successfully</p>;
+    return <p className="sos-success">🚨 SOS Sent Successfully</p>;
   }
 
   return (
-    <div>
-      {error && <p className="error">{error}</p>}
+    <div className="sos-container">
+      {error && <p className="error-text">{error}</p>}
 
       <button
+        className="sos-btn"
         onClick={sendSOS}
         disabled={loading}
-        style={{
-          background: "#d32f2f",
-          color: "white",
-          fontWeight: "bold",
-        }}
       >
         {loading ? "Sending SOS..." : "🚨 Send SOS"}
       </button>
