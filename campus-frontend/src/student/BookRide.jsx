@@ -1,22 +1,26 @@
 import { useState } from "react";
 import api from "../api/api";
+import LocationSearch from "../components/LocationSearch";
 
-export default function BookRide({
-  goBack,
-  setActiveRide,
-  setView,
-}) {
+export default function BookRide({ goBack, setActiveRide, setView }) {
   const [pickup, setPickup] = useState(null);
   const [drop, setDrop] = useState(null);
   const [error, setError] = useState("");
 
-  // 📍 Get current GPS location
+  // 📍 Use GPS
   const getCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      setError("Geolocation not supported");
+      return;
+    }
+
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        const lat = Number(pos.coords.latitude.toFixed(6));
-        const lng = Number(pos.coords.longitude.toFixed(6));
-        setPickup({ lat, lng });
+        setPickup({
+          lat: Number(pos.coords.latitude.toFixed(6)),
+          lng: Number(pos.coords.longitude.toFixed(6)),
+        });
+        setError("");
       },
       () => setError("Location permission denied")
     );
@@ -39,7 +43,6 @@ export default function BookRide({
         drop_lng: drop.lng,
       });
 
-      // 🔑 Central active ride state
       setActiveRide({
         id: res.data.ride_id,
         status: "pending",
@@ -52,9 +55,7 @@ export default function BookRide({
         err.response?.data ||
         "Failed to request ride";
 
-      setError(
-        typeof msg === "string" ? msg : JSON.stringify(msg)
-      );
+      setError(typeof msg === "string" ? msg : JSON.stringify(msg));
     }
   };
 
@@ -68,26 +69,22 @@ export default function BookRide({
         📍 Use My Current Location
       </button>
 
-      {pickup && <p>Pickup location set ✔</p>}
+      {pickup && (
+        <p className="info-text">Pickup selected ✔</p>
+      )}
+      {drop && (
+        <p className="info-text">Drop selected ✔</p>
+      )}
 
-      <select
-        onChange={(e) => {
-          if (!e.target.value) {
-            setDrop(null);
-          } else {
-            const loc = JSON.parse(e.target.value);
-            setDrop({
-              lat: Number(loc.lat.toFixed(6)),
-              lng: Number(loc.lng.toFixed(6)),
-            });
-          }
-        }}
-      >
-        <option value="">Select Drop Location</option>
-        <option value='{"lat":30.768,"lng":76.575}'>Main Gate</option>
-        <option value='{"lat":30.769,"lng":76.577}'>Library</option>
-        <option value='{"lat":30.767,"lng":76.574}'>Hostel Block</option>
-      </select>
+      <LocationSearch
+        label="Pickup Location (CU only)"
+        onSelect={setPickup}
+      />
+
+      <LocationSearch
+        label="Drop Location (CU only)"
+        onSelect={setDrop}
+      />
 
       <button onClick={requestRide}>Request Ride</button>
       <button onClick={goBack}>Back</button>

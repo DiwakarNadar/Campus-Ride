@@ -1,0 +1,34 @@
+.location-search {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.location-search input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d0d7ff;
+  font-size: 14px;
+}
+
+.search-results {
+  position: absolute;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  margin-top: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 20;
+}
+
+.search-results li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-results li:hover {
+  background: #eef3ff;
+}
