@@ -71,7 +71,7 @@ It enables students to book rides, drivers to accept and manage rides, and admin
 
 ## 📸 Screenshots
 
-> _(Add screenshots here for better presentation)_
+![Student Home](screenshots/student-home.png)
 
 Example:
 ```text
