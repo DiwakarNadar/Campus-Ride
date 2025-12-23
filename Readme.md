@@ -9,25 +9,25 @@ It enables students to book rides, drivers to accept and manage rides, and admin
 ---
 ## 📸 Screenshots
 
-# Student Register
+### Student Register
 ![Student Register](images/studentregister.png)
 
-# Driver Register
+### Driver Register
 ![Driver Register](images/driverregister.png)
 
-# Student Home
+### Student Home
 ![Student Home](images/studentpage.png)
 
-# Driver Home
+### Driver Home
 ![Driver Home](images/driverpage.png)
 
-# Book Ride
+### Book Ride
 ![Book Ride](images/bookride.png)
 
-# Ride Request
+### Ride Request
 ![Ride Request](images/riderequest.png)
 
-# Live Status
+### Live Status
 ![Live Status](images/livestatus.png)
 
 ---
