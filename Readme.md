@@ -7,6 +7,30 @@ It enables students to book rides, drivers to accept and manage rides, and admin
 👉 https://campus-ride-theta.vercel.app/
 
 ---
+## 📸 Screenshots
+
+# Student Register
+![Student Register](images/studentregister.png)
+
+# Driver Register
+![Driver Register](images/driverregister.png)
+
+# Student Home
+![Student Home](images/studentpage.png)
+
+# Driver Home
+![Driver Home](images/driverpage.png)
+
+# Book Ride
+![Book Ride](images/bookride.png)
+
+# Ride Request
+![Ride Request](images/riderequest.png)
+
+# Live Status
+![Live Status](images/livestatus.png)
+
+---
 
 ## ✨ Features
 
@@ -69,14 +93,6 @@ It enables students to book rides, drivers to accept and manage rides, and admin
 
 ---
 
-## 📸 Screenshots
 
-![Student Register](images/studentregister.png)
-![Driver Register](images/driverregister.png)
-![Student Home](images/studentpage.png)
-![Driver Home](images/driverpage.png)
-![Book Ride](images/bookride.png)
-![Ride Request](images/riderequest.png)
-![Live Status](images/livestatus.png)
 
 
