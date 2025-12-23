@@ -10,7 +10,7 @@ It enables students to book rides, drivers to accept and manage rides, and admin
 ## 📸 Screenshots
 
 ### Student Register
-![Student Register](images/studentregister.png)
+![Student Register](images/studentregister.png){width=200px height=100px}
 
 ### Driver Register
 ![Driver Register](images/driverregister.png)
