@@ -71,13 +71,12 @@ It enables students to book rides, drivers to accept and manage rides, and admin
 
 ## 📸 Screenshots
 
-![Student Home](images/studenthome.png)
+![Student Register](images/studentregister.png)
+![Driver Register](images/driverregister.png)
+![Student Home](images/studentpage.png)
+![Driver Home](images/driverpage.png)
+![Book Ride](images/bookride.png)
+![Ride Request](images/riderequest.png)
+![Live Status](images/livestatus.png)
 
-Example:
-```text
-/screenshots
- ├── login.png
- ├── student-home.png
- ├── book-ride.png
- ├── live-map.png
- ├── driver-dashboard.png
+
